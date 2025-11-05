@@ -9,7 +9,8 @@
     "build": "tsup src --out-dir build",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui --api 9527"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^24.9.2",
     "@vitest/coverage-v8": "^4.0.7",
+    "@vitest/ui": "^4.0.7",
     "eslint": "^8.57.1",
     "prisma": "^6.18.0",
     "tsup": "^8.5.0",
