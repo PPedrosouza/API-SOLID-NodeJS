@@ -4,6 +4,9 @@ import { compare } from 'bcryptjs'
 import { expect, describe, it, beforeEach } from 'vitest'
 import { RegisterService } from './register-service'
 
+// tipando as variaveis
+// SUT => System Under Test
+
 let usersRepository: InMemoryUsersRepository
 let sut: RegisterService
 
