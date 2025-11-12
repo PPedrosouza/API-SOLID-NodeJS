@@ -1,0 +1,62 @@
+import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
+import { expect, describe, it, beforeEach } from 'vitest'
+import { SearchGymUseCase } from './search-gym'
+
+let gymsRepository: InMemoryGymsRepository
+let sut: SearchGymUseCase
+
+describe('Search Gyms Use Case', () => {
+  beforeEach(async () => {
+    gymsRepository = new InMemoryGymsRepository()
+    sut = new SearchGymUseCase(gymsRepository)
+  })
+
+  it('should be able to search for gyms', async () => {
+    await gymsRepository.create({
+      title: 'JavaScript Gym',
+      description: 'A gym for JavaScript enthusiasts',
+      phone: '123-456-7890',
+      latitude: 40.7128,
+      longitude: -74.006,
+    })
+
+    await gymsRepository.create({
+      title: 'TypeScript Gym',
+      description: 'A gym for TypeScript enthusiasts',
+      phone: '987-654-3210',
+      latitude: 40.7128,
+      longitude: -74.006,
+    })
+
+    const { gyms } = await sut.execute({
+      query: 'JavaScript',
+      page: 1,
+    })
+
+    expect(gyms).toHaveLength(1)
+    expect(gyms).toEqual([expect.objectContaining({ title: 'JavaScript Gym' })])
+  })
+
+  it('should be able to fetch paginated gyms search', async () => {
+    for (let i = 1; i <= 22; i++) {
+      await gymsRepository.create({
+        title: `JavaScript Gym ${i}`,
+        description: null,
+        phone: null,
+        latitude: 40.7128,
+        longitude: -74.006,
+      })
+    }
+
+    const { gyms } = await sut.execute({
+      query: 'JavaScript',
+      page: 2,
+    })
+
+    expect(gyms).toHaveLength(2)
+    expect(gyms).toEqual([
+      expect.objectContaining({ title: 'JavaScript Gym 21' }),
+      expect.objectContaining({ title: 'JavaScript Gym 22' }),
+    ])
+  })
+})
