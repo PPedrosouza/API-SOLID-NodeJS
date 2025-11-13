@@ -7,8 +7,10 @@
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.cjs",
     "build": "tsup src --out-dir build",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test": "vitest run --project unit",
+    "test:e2e": "vitest run --project e2e",
+    "test:watch": "vitest --project unit",
+    "test:watch:e2e": "vitest --project e2e",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui --api 9527"
   },
@@ -27,6 +29,7 @@
     "tsup": "^8.5.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
+    "vite": "^7.2.2",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^4.0.7"
   },
