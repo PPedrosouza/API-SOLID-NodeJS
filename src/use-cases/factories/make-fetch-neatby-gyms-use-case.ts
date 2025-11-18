@@ -1,9 +1,9 @@
 import { PrismaGymsRepository } from '@/repositories/prisma/prisma-gyms-repository'
-import { GetUserMetricsUseCase } from '../get-user-metrics'
+import { FetchNearbyGymsUseCase } from '../fetch-near-by-gyms'
 
 export function makeFetchNearbyGymsUseCase() {
   const gymsRepository = new PrismaGymsRepository()
-  const useCase = new GetUserMetricsUseCase(gymsRepository)
+  const useCase = new FetchNearbyGymsUseCase(gymsRepository)
 
   return useCase
 }
