@@ -8,7 +8,7 @@ on:
 jobs:
   test-e2e:
     runs-on: ubuntu-latest
-    
+
     services:
       postgres:
         image: postgres:16
@@ -25,6 +25,7 @@ jobs:
           --health-retries=5
 
     env:
+      JWT_SECRET: test-ci-secret
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/app_test
       NODE_ENV: test
 
