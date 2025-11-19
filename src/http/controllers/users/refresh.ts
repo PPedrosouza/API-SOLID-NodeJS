@@ -1,10 +1,12 @@
-import { FastifyRequest, FastifyReply } from 'fastify'
+import { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function refresh(request: FastifyRequest, reply: FastifyReply) {
   await request.jwtVerify({ onlyCookie: true })
 
+  const { role } = request.user
+
   const token = await reply.jwtSign(
-    {},
+    { role },
     {
       sign: {
         sub: request.user.sub,
@@ -13,7 +15,7 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
   )
 
   const refreshToken = await reply.jwtSign(
-    {},
+    { role },
     {
       sign: {
         sub: request.user.sub,
@@ -24,10 +26,10 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
 
   return reply
     .setCookie('refreshToken', refreshToken, {
-      path: '/', // make the cookie available in all routes
-      secure: true, // send the cookie only over HTTPS
-      sameSite: true, // protect against CSRF attacks
-      httpOnly: true, // make the cookie inaccessible to JavaScript on the client side
+      path: '/',
+      secure: true,
+      sameSite: true,
+      httpOnly: true,
     })
     .status(200)
     .send({
