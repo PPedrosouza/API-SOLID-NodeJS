@@ -27,6 +27,13 @@ jobs:
 
       - run: npm ci
 
+      - name: Verificar se Prisma Client existe
+        run: |
+          echo "Listando node_modules/.prisma:"
+          ls -R node_modules/.prisma || echo "Diretório .prisma ausente"
+          echo "Listando node_modules/@prisma/client:"
+          ls -R node_modules/@prisma/client || echo "@prisma/client ausente"
+
       - run: npm run test:e2e
         env:
           JWT_SECRET: testing
