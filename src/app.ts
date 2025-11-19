@@ -1,7 +1,7 @@
 import { fastify } from 'fastify'
 import { usersRoutes } from './http/controllers/users/routes'
 import z, { ZodError } from 'zod'
-import { env } from './env'
+import { env } from '@/env'
 import fastifyJwt from '@fastify/jwt'
 import fastifyCookie from '@fastify/cookie'
 import { gymsRoutes } from './http/controllers/gyms/routes'
