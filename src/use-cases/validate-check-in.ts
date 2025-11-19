@@ -1,7 +1,7 @@
 import { CheckInsRepository } from '@/repositories/check-ins-repository'
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
 import { CheckIn } from '@prisma/client'
-import dayjs = require('dayjs')
+import dayjs from 'dayjs'
 import { LateCheckInValidationError } from './errors/late-check-in-validation-error'
 
 interface ValidateCheckInUseCaseRequest {
