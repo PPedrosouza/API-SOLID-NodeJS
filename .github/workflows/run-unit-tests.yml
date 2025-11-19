@@ -18,7 +18,3 @@ jobs:
             - run: npm ci
 
             - run: npm run test
-              env:
-                NODE_ENV: dev
-                JWT_SECRET: mba123
-                DATABASE_URL: postgres://postgres:password@localhost:5432/solid_test_db
