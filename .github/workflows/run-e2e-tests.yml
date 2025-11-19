@@ -37,7 +37,10 @@ jobs:
       # (Opcional) aplicar migrations se usar Postgres
       - name: Run migrations
         run: npx prisma migrate deploy
-
+        env:
+          JWT_SECRET: testing
+          DATABASE_URL: "postgresql://docker:docker@localhost:5432/apisolid?schema=public"
+          
       - run: npm run test:e2e
         env:
           JWT_SECRET: testing
